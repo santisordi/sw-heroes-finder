@@ -4,7 +4,7 @@ import { useHeroes, useSearch } from "./hooks";
 
 function App() {
   const { search, updateSearch, error} = useSearch()
-  const { heroes, getHeroes } = useHeroes({search})
+  const { heroes, getHeroes, loading } = useHeroes({search})
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); 
@@ -29,7 +29,10 @@ function App() {
         {error && <p style={{color: 'red'}}>{error}</p>}
       </header>
       <main>
-        <Heroes heroes={heroes}/> 
+        {
+          loading ? <p>cargando...</p>: 
+          <Heroes heroes={heroes}/> 
+        }
       </main>
     </div>
   );
