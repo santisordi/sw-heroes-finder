@@ -1,51 +1,19 @@
 # React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
 # sw-heroes-finder
+
+* Para instalar la app
+* pnpm i 
+* pnpm run dev 
+
+Objetivo: Diseñar y desarrollar un visor de tarjetas de héroes de Star Wars utilizando React y convertirlo en una PWA.
+Requisitos:
+ 1) Utiliza la SWAPI (The Star Wars API) para obtener información sobre los personajes de Star Wars. Por ejemplo, puedes consultar los datos de Luke Skywalker con la siguiente URL: .
+ 2) Diseña las tarjetas de héroes utilizando componentes de React.
+ 3) Cada tarjeta debe mostrar información relevante, como el nombre, la imagen del personaje y otros detalles interesantes.
+ 4) Implementa una función para cargar los datos de la API y renderizar las tarjetas dinámicamente.
+ 5) Convierte la aplicación en una PWA para que funcione offline, para ello debes permitir almacenar información en caso de que la app se encuentre offline  y se pueda instalar en dispositivos móviles y escritorio.
+Bono:
+ 1) Agrega animaciones o transiciones para mejorar la experiencia del usuario.
+ 2) Implementa una funcionalidad de búsqueda o pefiltrado de rsonajes.
+ 
+Recuerda que las PWAs ofrecen una experiencia similar a las aplicaciones nativas, pero se ejecutan en el navegador.# sw-heroes-finder-PWA

@@ -1,42 +1,51 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url('https://fonts.cdnfonts.com/css/star-wars');
+
+.container {
+    color: #fff;
+    font-family: Roboto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  min-height: 100vh;
+  background-image: url('/assets/images/background/deathStar-wallpaper.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: backgroundPan 30s infinite linear; 
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes backgroundPan {
+  0% {
+    background-position: 0% 50%;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  100% {
+    background-position: 100% 50%;
   }
 }
 
-.card {
-  padding: 2em;
+main {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
-.read-the-docs {
-  color: #888;
+form {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap; /* Ajusta automáticamente los elementos en pantallas pequeñas */
+  transition: transform 0.4s ease, opacity 0.4s ease; /* Suavizar el movimiento */
+}
+
+h1 {
+  font-family: star;
 }
