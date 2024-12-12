@@ -1,22 +1,30 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import "./App.css";
 import { Heroes } from "./components/heroes/heroes";
 import { useHeroes, useSearch } from "./hooks";
+import debounce from 'just-debounce-it'
 
 function App() {
   const { search, updateSearch, error} = useSearch()
   const [sort, setSort] = useState(false)
   const { heroes, getHeroes, loading } = useHeroes({search, sort})
 
+  const debouncedHeroes = useCallback(
+    debounce(search =>{
+      getHeroes({search})
+    }, 500),[getHeroes]
+  ) 
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); 
-    getHeroes()
+    getHeroes({search})
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuery = event.target.value
-    if(newQuery.startsWith(' ')) return
-    updateSearch(newQuery)
+    const newSearch = event.target.value
+    if(newSearch.startsWith(' ')) return
+    updateSearch(newSearch)
+    debouncedHeroes(newSearch)
   }
 
   const handleSort = () => {
