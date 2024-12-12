@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from "react";
 import { Hero } from "../lib/heroes";
 import { searchHeroes } from "../services/heroService";
 
-export function useHeroes({ search }: { search: string }) {
+export function useHeroes({ search, sort }: { search: string, sort: boolean }) {
   const [heroes, setHeroes] = useState<Hero[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -28,8 +28,12 @@ export function useHeroes({ search }: { search: string }) {
     }
   }, [search]);
 
+  const sortedHeroes = sort 
+  ? [...heroes].sort((a, b) => a.name.localeCompare(b.name))
+  : heroes
+
   return {
-    heroes,
+    heroes: sortedHeroes,
     getHeroes,
     loading,
     error,

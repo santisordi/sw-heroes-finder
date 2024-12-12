@@ -1,11 +1,12 @@
+import { useState } from "react";
 import "./App.css";
 import { Heroes } from "./components/heroes/heroes";
 import { useHeroes, useSearch } from "./hooks";
 
 function App() {
   const { search, updateSearch, error} = useSearch()
-  const { heroes, getHeroes, loading } = useHeroes({search})
-  
+  const [sort, setSort] = useState(false)
+  const { heroes, getHeroes, loading } = useHeroes({search, sort})
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); 
@@ -17,6 +18,10 @@ function App() {
     if(newQuery.startsWith(' ')) return
     updateSearch(newQuery)
   }
+
+  const handleSort = () => {
+    setSort(!sort)
+  }
  
   return (
     <div className="container">
@@ -25,6 +30,7 @@ function App() {
         <h3>Heroes Finder</h3>
         <form className="form" onSubmit={handleSubmit}>
           <input name="query" onChange={handleChange} value={search} placeholder="Luke, Darth, Leia..." />
+          <input type="checkbox" onChange={handleSort} />
           <button type="submit" >Buscar</button>
         </form>
         {error && <p style={{color: 'red'}}>{error}</p>}
