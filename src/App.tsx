@@ -3,19 +3,18 @@ import { Heroes } from "./components/heroes/heroes";
 import { useHeroes, useSearch } from "./hooks";
 
 function App() {
-  const { heroes: mappedHeroes} = useHeroes()
   const { search, updateSearch, error} = useSearch()
+  const { heroes, getHeroes } = useHeroes({search})
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); 
-    console.log({search});
+    getHeroes()
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = event.target.value
     if(newQuery.startsWith(' ')) return
     updateSearch(newQuery)
-   
   }
  
   return (
@@ -30,7 +29,7 @@ function App() {
         {error && <p style={{color: 'red'}}>{error}</p>}
       </header>
       <main>
-        <Heroes heroes={mappedHeroes}/> 
+        <Heroes heroes={heroes}/> 
       </main>
     </div>
   );

@@ -14,6 +14,13 @@ export interface Hero {
     starships: string[];
     created: string;
     edited: string;
-    image?: string; 
+    image?: string;
+    url: string 
   }
+
+
+export interface SearchHeroesParams {
+  search: string;
+  page?: number; 
+}
   
