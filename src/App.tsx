@@ -5,6 +5,7 @@ import { useHeroes, useSearch } from "./hooks";
 function App() {
   const { search, updateSearch, error} = useSearch()
   const { heroes, getHeroes, loading } = useHeroes({search})
+  
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); 
