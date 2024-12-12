@@ -2,9 +2,9 @@ import { Hero } from "../../lib/heroes";
 
 export function HeroesList({ heroes } : { heroes: Hero[]}) {
   return (
-    <ul>
+    <ul className="heroes">
       {heroes.map((hero: Hero) => (
-        <li key={hero.id}>
+        <li key={hero.id} className="hero">
           <h3>{hero.name}</h3>
           <p>{hero.gender}</p>
           <p>{hero.height}</p>
@@ -13,6 +13,7 @@ export function HeroesList({ heroes } : { heroes: Hero[]}) {
               .toLowerCase()
               .replace(/\s+/g, "-")}.webp`}
             alt={hero.name}
+            className="hero.image"
           />
         </li>
       ))}

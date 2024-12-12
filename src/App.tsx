@@ -8,8 +8,6 @@ function App() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); 
-    // const form = event.target as HTMLFormElement;
-    // const {query} = Object.fromEntries(new window.FormData(form)) 
     console.log({search});
   };
 
@@ -23,7 +21,8 @@ function App() {
   return (
     <div className="container">
       <header>
-        <h1>SW Heroes Finder</h1>
+        <h1>STAR WARS</h1>
+        <h3>Heroes Finder</h3>
         <form className="form" onSubmit={handleSubmit}>
           <input name="query" onChange={handleChange} value={search} placeholder="Luke, Darth, Leia..." />
           <button type="submit" >Buscar</button>
