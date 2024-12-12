@@ -1,12 +1,9 @@
 import "./App.css";
 import { Heroes } from "./components/heroes/heroes";
-import { Hero } from "./lib/heroes";
-
-import responseHeroes from './mock/heroesMock.json'
+import { useHeroes } from "./hooks/useHeroes";
 
 function App() {
-  
-  const heroes: Hero[] = responseHeroes.results
+  const { heroes: mappedHeroes} = useHeroes()
 
   return (
     <div className="container">
@@ -17,9 +14,8 @@ function App() {
           <button>Buscar</button>
         </form>
       </header>
-
       <main>
-        <Heroes heroes={heroes}/> 
+        <Heroes heroes={mappedHeroes}/> 
       </main>
     </div>
   );
