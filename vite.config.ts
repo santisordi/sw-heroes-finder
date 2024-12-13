@@ -7,6 +7,16 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
+      devOptions: {
+        enabled:true
+      },
+      strategies: "injectManifest",
+      srcDir: "src",
+      filename:"sw.ts",
+      registerType: "autoUpdate",
+      injectManifest: {
+        swDest:"dist/sw.js"
+      },
       manifest: {
         display: 'standalone',
         display_override: ['window-controls-overlay'],
