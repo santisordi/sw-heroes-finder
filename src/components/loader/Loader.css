@@ -1,0 +1,31 @@
+.loader-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding-top: 2rem
+  }
+  
+  .loader-logo {
+    height: 4rem;
+    width: 4rem;
+  }
+  
+  .rotating-icon {
+    animation: loaderSpin 2.5s linear infinite;
+    fill: #ffe81f;
+    height: 100%; 
+    width: 100%;
+  }
+  
+  /* Rotación animada */
+  @keyframes loaderSpin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

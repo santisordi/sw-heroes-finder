@@ -3,6 +3,9 @@ import "./App.css";
 import { Heroes } from "./components/heroes/heroes";
 import { useHeroes, useSearch } from "./hooks";
 import debounce from 'just-debounce-it'
+import { Header } from "./components/header/Header";
+import { SearchForm } from "./components/searchForm/SearchForm";
+import { Loader } from "./components/loader/Loader";
 
 function App() {
   const { search, updateSearch, error} = useSearch()
@@ -33,19 +36,16 @@ function App() {
  
   return (
     <div className="container">
-      <header>
-        <h1>STAR WARS</h1>
-        <h3>Heroes Finder</h3>
-        <form className="form" onSubmit={handleSubmit}>
-          <input name="query" onChange={handleChange} value={search} placeholder="Luke, Darth, Leia..." />
-          <input type="checkbox" onChange={handleSort} />
-          <button type="submit" >Buscar</button>
-        </form>
+      <Header /> 
+      <SearchForm
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        handleSort={handleSort} 
+      />
         {error && <p style={{color: 'red'}}>{error}</p>}
-      </header>
       <main>
         {
-          loading ? <p>cargando...</p>: 
+          loading ? <Loader />: 
           <Heroes heroes={heroes}/> 
         }
       </main>

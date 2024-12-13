@@ -1,4 +1,4 @@
-import { Hero, SearchHeroesParams } from "../lib/heroes";
+import { Hero, SearchHeroesParams } from "../lib/definitions/heroes";
 
 export const searchHeroes = async ({ 
     search
