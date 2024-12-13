@@ -2,13 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
   font-family: Arial, sans-serif;
   margin-top: 2rem;
-  /* position: fixed;
+  position: fixed;
   bottom: 0;
   padding: 2rem;
-  z-index: 9999; */
+  z-index: 9999;
 }
 
 .pagination-previous,

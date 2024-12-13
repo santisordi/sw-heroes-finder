@@ -1,4 +1,5 @@
 import { SearchFormProps } from "../../../lib/definitions/search";
+import { Button } from "../../button/Button";
 
 export function SearchForm({
   handleChange,
@@ -21,9 +22,9 @@ export function SearchForm({
           borderColor: error ? "red" : "transparent",
         }}
       />
-      Sort by name
+      Ordena por nombre
       <input type="checkbox" onChange={handleSort} checked={sort} value={search} />
-      <button type="submit">buscar</button>
+      <Button label="Buscar" parentMethod={()=>handleSubmit} />
       {error && (
         <p style={{ color: "red" }} className="error">
           {error}

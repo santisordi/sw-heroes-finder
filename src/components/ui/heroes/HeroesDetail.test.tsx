@@ -1,8 +1,6 @@
 import { render, fireEvent, screen, waitFor, act } from '@testing-library/react';
-import { HeroesDetail } from './HeroesDetail'; // Asegúrate de que importes el componente correcto
+import { HeroesDetail } from './HeroesDetail'; 
 
-
-// Datos de prueba
 const heroesMock = [
     {
       id: 1,
@@ -37,7 +35,7 @@ const heroesMock = [
   ];
 
 // Test de integración
-test('muestra la lista de héroes y selecciona un héroe', async () => {
+test('should show a list of heores and select the heroe', async () => {
   // Renderizar el componente con los héroes
   render(<HeroesDetail heroes={heroesMock} />);
   

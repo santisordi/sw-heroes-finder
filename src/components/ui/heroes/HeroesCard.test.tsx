@@ -9,7 +9,7 @@ const mockHero: Hero = {
   height: 1.72,
   mass: 77,
   skin_color: "fair",
-  image: "/assets/images/heroImages/luke-skywalker.webp", // En este caso no necesitas poner la URL real de la imagen
+  image: "/assets/images/heroImages/luke-skywalker.webp", 
   url: "http://swapi.dev/api/people/1/",
 };
 
