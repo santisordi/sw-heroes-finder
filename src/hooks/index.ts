@@ -1,2 +1,5 @@
 export * from './useHeroes'
+export * from './useHeroesSetelction'
 export * from './useSearch'
+export * from './useSearchForm'
+export * from './useSort'

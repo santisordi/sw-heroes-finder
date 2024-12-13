@@ -1,39 +1,63 @@
 import "./App.css";
-import { Header, Heroes, Loader, SearchForm } from "./components";
-import { useHeroes, useSearch } from "./hooks";
-import { useSearchForm } from "./hooks/useSearchForm";
-import { useSort } from "./hooks/useSort";
+import { useHeroes, useHeroSelection, useSearch, useSearchForm, useSort,  } from "./hooks";
+import { Header, Heroes, Loader, Pagination, SearchForm } from "./components";
 
 
-function App() {
-  const { search, setSearch, error} = useSearch()
+const App: React.FC = () => {
   const { sort, handleSort } = useSort();
-  const { heroes, getHeroes, loading } = useHeroes({search, sort})
+  const { search, setSearch, error } = useSearch();
+  const {
+    heroes,
+    loading,
+    getHeroes,
+    currentPage,
+    setCurrentPage,
+    totalHeroes,
+    heroesPerPage,
+    lastIndex, 
+    firstIndex,
+    isSearchPerformed
+  } = useHeroes({
+    search,
+    sort,
+  });
   const { handleSubmit, handleChange } = useSearchForm({
     getHeroes,
     setSearch,
   });
- 
+  const {
+    showPagination,
+  } = useHeroSelection();
+
+  const paginatedHeroes = heroes.slice(firstIndex, lastIndex)
+
   return (
-    <div className="container">
-      <Header /> 
+    <div className="page">
+      <Header />
       <SearchForm
         handleChange={handleChange}
-        handleSubmit={handleSubmit}
+        handleSubmit={handleSubmit} 
+        search={search}
+        error={error}
         handleSort={handleSort}
         sort={sort}
-        error={error}
-        search={search}
       />
-        {error && <p style={{color: 'red'}}>{error}</p>}
       <main>
-        {
-          loading ? <Loader />: 
-          <Heroes heroes={heroes}/> 
-        }
-      </main>
+        {loading ? 
+        <div>
+          <Loader />
+        </div>
+        : <Heroes heroes={paginatedHeroes} isSearchPerformed={isSearchPerformed} />}
+        </main>
+      {showPagination && (
+        <Pagination
+        heroesPerPage={heroesPerPage}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalHeroes={totalHeroes}
+      />)}
     </div>
   );
-}
+};
 
-export default App
+export default App;

@@ -1,45 +1,63 @@
 import { useCallback, useMemo, useRef, useState } from "react";
-import { Hero } from "../lib/heroes";
 import { searchHeroes } from "../services/heroService";
+import { Hero, UseHeroesProps } from "../lib/definitions/heroes";
 
-export function useHeroes({ search, sort }: { search: string, sort: boolean }) {
+export function useHeroes({ search, sort }: UseHeroesProps) {
   const [heroes, setHeroes] = useState<Hero[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const previousSearch = useRef(search)
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [heroesPerPage, setHeroesPerPage] = useState<number>(4);
+  const [isSearchPerformed, setIsSearchPerformed] = useState<boolean>(false)
 
-  const getHeroes = useCallback(async ({ search }: { search: string }) => {
-    //injecto search por parametro para que se genere solo 1 vez
+  const previousSearch = useRef<string>(search);
+  const totalHeroes = heroes.length
+  const lastIndex = currentPage * heroesPerPage
+  const firstIndex = lastIndex - heroesPerPage
+  
+  const getHeroes = useCallback (async (
+    { search }: { search: string } //paso search por parametro para que no dependa del estado
+  ) => {
     if (search === previousSearch.current) return;
+    setCurrentPage(1)
+    setIsSearchPerformed(true)
     try {
       setLoading(true);
       setError(null);
-      previousSearch.current = search
-      const newHeroes = await searchHeroes({ search });
+      previousSearch.current = search;
 
+      const newHeroes = await searchHeroes({ 
+        search, 
+        page: currentPage });
       if (newHeroes) {
-        setHeroes(newHeroes);
+        setHeroes (newHeroes);
       } else {
-        setHeroes([]);
+        setHeroes([]); // manejo por si el null
       }
     } catch (e: any) {
-      setError(e.message); 
+      setError(e.message);
     } finally {
       setLoading(false);
     }
   }, []);
+  //useMemo unicamente para calculos
+  const sortedHeroes = useMemo(() => {
+    return sort
+      ? [...heroes].sort((a, b) => a.name.localeCompare(b.name))
+      : heroes;
+  }, [ sort, heroes]);
 
-  const sortedHeroes = useMemo(()=>{
-    return sort 
-    ? [...heroes].sort((a, b) => a.name.localeCompare(b.name))
-    : heroes
-  
-  },[sort, heroes])
-
-  return {
+  return { 
     heroes: sortedHeroes,
-    getHeroes,
-    loading,
+    getHeroes, 
+    setCurrentPage,
+    currentPage,
+    heroesPerPage,
+    loading, 
     error,
+    totalHeroes,
+    lastIndex,
+    firstIndex,
+    isSearchPerformed
   };
 }
