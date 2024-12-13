@@ -10,7 +10,7 @@ export function SearchForm({
 }: SearchFormProps) {
   
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit} data-testid="search-form">
       <input
         onChange={handleChange}
         name="search"
