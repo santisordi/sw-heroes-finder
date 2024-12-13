@@ -1,0 +1,9 @@
+.hero-container {
+    margin: 2rem;
+}
+.hero-image {
+  height: 250px; 
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}

@@ -1,4 +1,5 @@
 @import url('https://fonts.cdnfonts.com/css/star-wars');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 body {
   min-height: 100vh;
@@ -8,25 +9,17 @@ body {
   background-repeat: no-repeat;
   animation: backgroundPan 30s infinite linear; 
 }
-.container {
-    color: #fff;
-    font-family: Roboto;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-}
 
-@keyframes backgroundPan {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
+.page { 
+  color: #fff;
+  font-family: Roboto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
 }
 
 main {
@@ -40,33 +33,103 @@ form {
   display: flex;
   justify-content: center;
   gap: 16px;
-}
-
-h1 {
-  font-family: 'Star Wars';
+  flex-wrap: wrap; /* Ajusta automáticamente los elementos en pantallas pequeñas */
+  transition: transform 0.4s ease, opacity 0.4s ease; /* Suavizar el movimiento */
 }
 
 .heroes {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
-  padding: 0;
-  margin: 0;
   list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  width: 100%;
+  gap: 24px;
+  margin-top: 16px;
 }
 
 .hero {
+  margin-bottom: 20px;
+  background-color: rgba(34, 34, 34, 0.9); /* Fondo más transparente */
+  color: #fff;
+  padding: 1.2rem;
+  border: 2px solid #ffffff99; /* Bordes semi-transparentes */
+  border-radius: 20px; /* Más redondeado */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 2px 6px rgba(255, 255, 255, 0.2);
   text-align: center;
+
+  /* Animación inicial de aparición */
+  animation: slideIn 1s ease-out forwards;
+  opacity: 0;
+
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
 }
 
 .hero h3, .hero p {
   margin: 0;
 }
 
-.hero-image {
-  height: 250px; 
-  object-fit: cover; 
-  border-radius: 10px;
-  margin-bottom: 1rem;
+/* Hover: agrandar tarjeta y resaltar bordes */
+.hero:hover {
+  transform: translateY(-10px) scale(1.05); /* Nuevo efecto de desplazamiento */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), 0 4px 10px rgba(255, 255, 255, 0.3);
+  border-color: #ffdf00; /* Cambiar a amarillo claro */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Nueva animación para la entrada */
+@keyframes slideIn {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animación de panorámica para el fondo */
+@keyframes backgroundPan {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .heroes {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  form {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hero {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .page {
+    max-width: 90%;
+    padding: 0 24px;
+  }
+
+  .heroes {
+    grid-template-columns: repeat(3, 1fr); /* Más columnas en pantallas grandes */
+    gap: 32px;
+  }
+
+  .hero {
+    padding: 1.4rem;
+    font-size: 1.1rem;
+    border-radius: 15px;
+  }
 }

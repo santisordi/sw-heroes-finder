@@ -1,4 +1,4 @@
-import "./HeroesDetail.css";
+import './HeroesDetail.css'
 import { HeroesCard } from "./HeroesCard";
 import { HeroesProps } from "../../../lib/definitions/heroes";
 import { useHeroSelection } from "../../../hooks/useHeroesSetelction";

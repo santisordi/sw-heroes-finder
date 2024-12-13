@@ -1,7 +1,12 @@
 import "./App.css";
-import { useHeroes, useHeroSelection, useSearch, useSearchForm, useSort,  } from "./hooks";
+import {
+  useHeroes,
+  useHeroSelection,
+  useSearch,
+  useSearchForm,
+  useSort,
+} from "./hooks";
 import { Header, Heroes, Loader, Pagination, SearchForm } from "./components";
-
 
 const App: React.FC = () => {
   const { sort, handleSort } = useSort();
@@ -14,9 +19,9 @@ const App: React.FC = () => {
     setCurrentPage,
     totalHeroes,
     heroesPerPage,
-    lastIndex, 
+    lastIndex,
     firstIndex,
-    isSearchPerformed
+    isSearchPerformed,
   } = useHeroes({
     search,
     sort,
@@ -25,37 +30,41 @@ const App: React.FC = () => {
     getHeroes,
     setSearch,
   });
-  const {
-    showPagination,
-  } = useHeroSelection();
+  const { showPagination } = useHeroSelection();
 
-  const paginatedHeroes = heroes.slice(firstIndex, lastIndex)
+  const paginatedHeroes = heroes.slice(firstIndex, lastIndex);
 
   return (
     <div className="page">
       <Header />
       <SearchForm
         handleChange={handleChange}
-        handleSubmit={handleSubmit} 
+        handleSubmit={handleSubmit}
         search={search}
         error={error}
         handleSort={handleSort}
         sort={sort}
       />
       <main>
-        {loading ? 
-        <div>
-          <Loader />
-        </div>
-        : <Heroes heroes={paginatedHeroes} isSearchPerformed={isSearchPerformed} />}
-        </main>
+        {loading ? (
+          <div>
+            <Loader />
+          </div>
+        ) : (
+          <Heroes
+            heroes={paginatedHeroes}
+            isSearchPerformed={isSearchPerformed}
+          />
+        )}
+      </main>
       {showPagination && (
         <Pagination
-        heroesPerPage={heroesPerPage}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalHeroes={totalHeroes}
-      />)}
+          heroesPerPage={heroesPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalHeroes={totalHeroes}
+        />
+      )}
     </div>
   );
 };

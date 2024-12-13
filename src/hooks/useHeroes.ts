@@ -7,7 +7,7 @@ export function useHeroes({ search, sort }: UseHeroesProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [heroesPerPage, setHeroesPerPage] = useState<number>(4);
+  const [heroesPerPage] = useState<number>(4);
   const [isSearchPerformed, setIsSearchPerformed] = useState<boolean>(false)
 
   const previousSearch = useRef<string>(search);
@@ -15,7 +15,7 @@ export function useHeroes({ search, sort }: UseHeroesProps) {
   const lastIndex = currentPage * heroesPerPage
   const firstIndex = lastIndex - heroesPerPage
   
-  const getHeroes = useCallback (async (
+  const getHeroes = useCallback (async ( //utilizo useCallBack para guardar la ref en memmo y que no monte el compo tras otro search
     { search }: { search: string } //paso search por parametro para que no dependa del estado
   ) => {
     if (search === previousSearch.current) return;
@@ -34,13 +34,17 @@ export function useHeroes({ search, sort }: UseHeroesProps) {
       } else {
         setHeroes([]); // manejo por si el null
       }
-    } catch (e: any) {
-      setError(e.message);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        setError(e.message);
+      } else {
+        setError('An unexpected error occurred');
+      }
     } finally {
       setLoading(false);
     }
-  }, []);
-  //useMemo unicamente para calculos
+  }, [currentPage]);
+  //aca uso useMemo para hacer el calculo solamente 
   const sortedHeroes = useMemo(() => {
     return sort
       ? [...heroes].sort((a, b) => a.name.localeCompare(b.name))

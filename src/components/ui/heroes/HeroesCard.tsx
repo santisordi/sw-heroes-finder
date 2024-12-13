@@ -1,5 +1,5 @@
 import { HeroesCardProps } from "../../../lib/definitions/heroes";
-import "./HeroesCards.css";
+import './HeroesCards.css'
 
 export function HeroesCard({ hero }: HeroesCardProps) {
   const heroImage = `/assets/images/heroImages/${hero.name
