@@ -1,7 +1,7 @@
 import "./HeroesDetail.css";
 import { HeroesCard } from "./HeroesCard";
-import { HeroesProps } from "../../lib/definitions/heroes";
-import { useHeroSelection } from "../../hooks/useHeroesSetelction";
+import { HeroesProps } from "../../../lib/definitions/heroes";
+import { useHeroSelection } from "../../../hooks/useHeroesSetelction";
 
 export function HeroesDetail({ heroes }: HeroesProps) {
   const { selectedHero, selectHero, deselectHero } = useHeroSelection();

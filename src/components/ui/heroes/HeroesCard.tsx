@@ -1,4 +1,4 @@
-import { HeroesCardProps } from "../../lib/definitions/heroes";
+import { HeroesCardProps } from "../../../lib/definitions/heroes";
 import "./HeroesCards.css";
 
 export function HeroesCard({ hero }: HeroesCardProps) {

@@ -1,4 +1,4 @@
-import { Hero } from "../../lib/heroes";
+import { Hero } from "../../../lib/definitions/heroes";
 
 export function HeroesList({ heroes } : { heroes: Hero[]}) {
   return (

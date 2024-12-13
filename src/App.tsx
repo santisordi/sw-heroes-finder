@@ -1,11 +1,9 @@
 import "./App.css";
-import { Heroes } from "./components/heroes/heroes";
+import { Header, Heroes, Loader, SearchForm } from "./components";
 import { useHeroes, useSearch } from "./hooks";
-import { Header } from "./components/header/Header";
-import { SearchForm } from "./components/searchForm/SearchForm";
-import { Loader } from "./components/loader/Loader";
-import { useSort } from "./hooks/useSort";
 import { useSearchForm } from "./hooks/useSearchForm";
+import { useSort } from "./hooks/useSort";
+
 
 function App() {
   const { search, setSearch, error} = useSearch()
@@ -23,7 +21,9 @@ function App() {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         handleSort={handleSort}
-        sort={sort} 
+        sort={sort}
+        error={error}
+        search={search}
       />
         {error && <p style={{color: 'red'}}>{error}</p>}
       <main>
