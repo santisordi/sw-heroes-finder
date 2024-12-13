@@ -1,38 +1,20 @@
-import { useCallback, useState } from "react";
 import "./App.css";
 import { Heroes } from "./components/heroes/heroes";
 import { useHeroes, useSearch } from "./hooks";
-import debounce from 'just-debounce-it'
 import { Header } from "./components/header/Header";
 import { SearchForm } from "./components/searchForm/SearchForm";
 import { Loader } from "./components/loader/Loader";
+import { useSort } from "./hooks/useSort";
+import { useSearchForm } from "./hooks/useSearchForm";
 
 function App() {
-  const { search, updateSearch, error} = useSearch()
-  const [sort, setSort] = useState(false)
+  const { search, setSearch, error} = useSearch()
+  const { sort, handleSort } = useSort();
   const { heroes, getHeroes, loading } = useHeroes({search, sort})
-
-  const debouncedHeroes = useCallback(
-    debounce(search =>{
-      getHeroes({search})
-    }, 500),[getHeroes]
-  ) 
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); 
-    getHeroes({search})
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newSearch = event.target.value
-    if(newSearch.startsWith(' ')) return
-    updateSearch(newSearch)
-    debouncedHeroes(newSearch)
-  }
-
-  const handleSort = () => {
-    setSort(!sort)
-  }
+  const { handleSubmit, handleChange } = useSearchForm({
+    getHeroes,
+    setSearch,
+  });
  
   return (
     <div className="container">
@@ -40,7 +22,8 @@ function App() {
       <SearchForm
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        handleSort={handleSort} 
+        handleSort={handleSort}
+        sort={sort} 
       />
         {error && <p style={{color: 'red'}}>{error}</p>}
       <main>
